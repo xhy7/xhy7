@@ -11,11 +11,6 @@ author: John Doe
 language: en
 timezone: ''
 
-# Prism 插件配置
-prism:
-  theme: prism-tomorrow   # 符号半角 + 冒号后空格
-  line_number: true       # 符号半角
-  language_prefix: 'language-'
 
 
 # URL
