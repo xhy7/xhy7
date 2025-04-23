@@ -11,9 +11,17 @@ author: John Doe
 language: en
 timezone: ''
 
+# Prism 插件配置
+prism:
+  theme: prism-tomorrow   # 符号半角 + 冒号后空格
+  line_number: true       # 符号半角
+  language_prefix: 'language-'
+
+
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://xhy777.asia
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -29,6 +37,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -92,6 +101,7 @@ pagination_dir: page
 include:
 exclude:
 ignore:
+
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
