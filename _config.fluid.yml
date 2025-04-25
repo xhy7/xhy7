@@ -33,7 +33,7 @@ tab_title_separator: " - "
 force_https: false
 
 waline:
-  serverURL: "xhy-xaviers-projects-522cdef0.vercel.app"  # 替换为你的服务端地址
+  serverURL: "https://xhy-xaviers-projects-522cdef0.vercel.app"  # 替换为你的服务端地址
   pageview: true                                  # 开启阅读量统计
   comment: true                                   # 开启评论
   dark: "auto"                                    # 自动暗黑模式
