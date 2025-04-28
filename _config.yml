@@ -103,3 +103,10 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+Blog-Like:
+  enable: true
+  AppID: "xX3VwKU8zGdlW2X9iVfKNQh2-gzGzoHsz"  # 应用凭证中获取
+  AppKEY: "MJ8GqCzNhjprX3lHwsPehH61"
+  xianzhi: true   # 限制单用户重复点赞
+  number: 10      # 同一用户最多点赞5次
