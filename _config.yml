@@ -110,3 +110,4 @@ Blog-Like:
   AppKEY: "MJ8GqCzNhjprX3lHwsPehH61"
   xianzhi: true   # 限制单用户重复点赞
   number: 10      # 同一用户最多点赞5次
+  serverURLs: "https://xx3vwku8.lc-cn-n1-shared.com"
