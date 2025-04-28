@@ -767,7 +767,7 @@ post:
 # Based on GitHub Issues
 # See: https://utteranc.es
 utterances:
-  repo:xhy7/blog_comments
+  repo: xhy7/blog_comments
   issue_term: pathname
   label: utterances
   theme: github-light
