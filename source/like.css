@@ -1,44 +1,29 @@
-/* 点赞按钮核心样式 */
-#zan {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 30px 0;
+/* 基础样式 */
+.like-container {
+    margin: 1.5rem 0;
+    text-align: center;
 }
 
-.heart {
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  /* 使用 Font Awesome 图标 */
-  &::before {
-    font-family: "Font Awesome 5 Free";
-    content: "\f004"; /* 空心心形 */
-    font-size: 24px;
-    color: #999;
-    transition: color 0.3s;
-  }
-  &.liked::before {
-    content: "\f004"; /* 实心心形 */
-    font-weight: 900;
-    color: #ff4081;
-    animation: pulse 0.5s;
-  }
+.like-btn {
+    background: none;
+    border: 2px solid #42b983;
+    border-radius: 20px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-#zan_text {
-  font-size: 14px;
-  color: #666;
+/* 点击态样式 */
+.like-btn.liked {
+    background: #42b983;
+    border-color: transparent;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+/* 动画效果 */
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
-
-/* 手机端适配 */
-@media (max-width: 768px) {
-  #zan { margin: 15px 0; }
-  .heart { width: 24px; height: 24px; }
+.like-btn:active {
+    animation: bounce 0.4s;
 }
