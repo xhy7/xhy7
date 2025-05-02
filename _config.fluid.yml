@@ -32,8 +32,6 @@ tab_title_separator: " - "
 # Force all links to be HTTPS (applicable to HTTP mixed error)
 force_https: false
 
-custom_css: /like.css
-
 # 代码块的增强配置
 # Enhancements to code blocks
 code:
@@ -239,7 +237,7 @@ custom_js:
 
 # 指定自定义 .css 文件路径，用法和 custom_js 相同
 # The usage is the same as custom_js
-custom_css:
+custom_css: like.css
 
 # 网页访问统计
 # Analysis of website visitors
