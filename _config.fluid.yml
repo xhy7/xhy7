@@ -32,6 +32,8 @@ tab_title_separator: " - "
 # Force all links to be HTTPS (applicable to HTTP mixed error)
 force_https: false
 
+custom_css: /like.css
+
 # 代码块的增强配置
 # Enhancements to code blocks
 code:
