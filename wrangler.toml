@@ -1,0 +1,10 @@
+name = "xhy_blog"
+type = "webpack"
+account_id = "5e5cbba61506f6a9ecb36a2d63b762d3"
+workers_dev = false
+route = "xhy777.asia/*"
+zone_id = "974d178fdd3c86f715186b38ec6f89a4"
+
+[site]
+bucket = "./public"
+entry-point = "workers-site"
