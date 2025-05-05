@@ -73,4 +73,85 @@ maxnode[u] = max(maxnode[u], n - maxnode[u]);//这里很容易忽略，由于这
 maxnode是指以当前节点为根节点的子树的最大节点数量；
 而childnode是指包括当前节点在内的以当前节点为根的所有节点数量总和。
 详情可看grl老师的灵魂画图 🥰
+## 扩展(2025-5-5)
+当树的边权不全为1，而会是其他值的时候，就有另外一种新的做法：先来看具体代码
+```cpp
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+struct edge {
+    int to, weight;
+    edge(int t, int w) : to(t), weight(w) {}
+};
+
+vector<vector<edge>> tree;
+vector<int> sub_w; // 子树边权总和（仅包含子树内部）
+int total = 0;     // 整棵树的边权总和
+
+void dfs_pre(int u, int fath) {
+    for (auto& e : tree[u]) {
+        if (e.to != fath) {
+            dfs_pre(e.to, u);
+            sub_w[u] += sub_w[e.to] + e.weight; // 包含当前边权
+        }
+    }
+}
+
+vector<int> dis;
+int min_max = INT_MAX;
+int center;
+
+void dfs_cal(int u, int fath) {
+    int max_sub = 0;
+    for (auto& e : tree[u]) {
+        if (e.to != fath) {
+            // 动态调整公式
+            dis[e.to] = dis[u] + (total - 2 * sub_w[e.to]) * e.weight;
+            // 计算最大子树边权
+            int cur = sub_w[e.to] + e.weight;
+            max_sub = max(max_sub, cur);
+        }
+    }
+    // 比较上方子树（总边权 - 当前子树边权 - 父边权）
+    max_sub = max(max_sub, total - sub_w[u] - 0); // 0为父边权（已包含在total中）
+    
+    if (max_sub < min_max) {
+        min_max = max_sub;
+        center = u;
+    }
+
+    for (auto& e : tree[u]) {
+        if (e.to != fath) {
+            dfs_cal(e.to, u);
+        }
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    tree.resize(n + 1);
+    sub_w.resize(n + 1, 0);
+    dis.resize(n + 1, 0);
+
+    // 输入边并计算总边权
+    for (int i = 0; i < n - 1; i++) {
+        int x, y, w;
+        cin >> x >> y >> w;
+        tree[x].emplace_back(y, w);
+        tree[y].emplace_back(x, w);
+        total += w; // 正确统计单次边权
+    }
+
+    dfs_pre(1, 0);
+    dfs_cal(1, 0);
+
+    cout << "重心节点: " << center << endl;
+    return 0;
+}
+```
+核心点是两个dfs，首先第一个dfs_pre是为了初始化sub_w的数组，把以每个节点为根的子树边权和求出来(包括节点本身)
+第二个dfs_cal是计算重心，其中动态调整公式是核心
 
