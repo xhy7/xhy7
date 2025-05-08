@@ -152,8 +152,8 @@ color:
 
   # 顶部菜单字体色
   # Color of navigation bar text
-  navbar_bg_color: "#FFB6C1"    # 浅粉（类似樱花色）
-  navbar_bg_color_dark: "#DB7093"  # 深粉（类似桃红色）
+  navbar_text_color: "#FFB6C1"    # 浅粉（类似樱花色）
+  navbar_text_color_dark: "#DB7093"  # 深粉（类似桃红色）
 
   # 副标题字体色
   # Color of subtitle text
