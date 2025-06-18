@@ -229,6 +229,128 @@ TreeNode* buildTree(vector<string>& nodes) {
     return root;
 }
 
+//区分最小生成树和最短路径问题，最小生成树中某顶点到其余各顶点的路径不一定具有最短路径的性质。
+
+// Prim算法求最小生成树
+    int primMST() {
+        vector<bool> inMST(V, false); // 是否在MST中
+        vector<int> key(V, INT_MAX); // 每个顶点的最小权值
+        vector<int> parent(V, -1); // 父节点
+
+        // 优先队列用于选择最小权值的边
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+        // 从顶点0开始
+        int src = 0;
+        pq.push({0, src});
+        key[src] = 0;
+
+        while (!pq.empty()) {
+            int u = pq.top().second;
+            pq.pop();
+
+            if (inMST[u]) continue;
+
+            inMST[u] = true;
+
+            // 遍历所有邻接顶点
+            for (auto& edge : adj[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+
+                if (!inMST[v] && weight < key[v]) {
+                    key[v] = weight;
+                    parent[v] = u;
+                    pq.push({key[v], v});
+                }
+            }
+        }
+    }
+ // Kruskal算法求最小生成树
+    int kruskalMST() {
+        vector<Edge> edges;
+        // 收集所有边
+        for (int u = 0; u < V; u++) {
+            for (auto& edge : adj[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+                if (u < v) { // 避免重复添加
+                    edges.push_back({u, v, weight});
+                }
+            }
+        }
+
+        // 按权值排序
+        sort(edges.begin(), edges.end());
+
+        // 并查集初始化
+        vector<int> parent(V);
+        for (int i = 0; i < V; i++) {
+            parent[i] = i;
+        }
+
+        // 查找函数
+        function<int(int)> find = [&](int x) {
+            if (parent[x] != x) {
+                parent[x] = find(parent[x]);
+            }
+            return parent[x];
+        };
+
+        int totalWeight = 0;
+        int edgeCount = 0;
+
+        // 遍历所有边
+        for (auto& edge : edges) {
+            int u = edge.u;
+            int v = edge.v;
+            int weight = edge.weight;
+
+            int setU = find(u);
+            int setV = find(v);
+
+            if (setU != setV) {
+                totalWeight += weight;
+                edgeCount++;
+                parent[setU] = setV; // 合并集合
+
+                if (edgeCount == V - 1) break; // MST的边数为V-1
+            }
+        }
+
+        return totalWeight;
+    }
+
+   // Dijkstra算法求最短路径
+    vector<int> dijkstra(int src) {
+        vector<int> dist(V, INT_MAX); // 距离数组
+        dist[src] = 0;
+
+        // 优先队列用于选择最小距离的顶点
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        pq.push({0, src});
+
+        while (!pq.empty()) {
+            int u = pq.top().second;
+            int d = pq.top().first;
+            pq.pop();
+
+            if (d > dist[u]) continue;
+
+            // 遍历所有邻接顶点
+            for (auto& edge : adj[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+
+                if (dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                    pq.push({dist[v], v});
+                }
+            }
+        }
+
+        return dist;
+    }
 // Floyd-Warshall算法实现
 void floydWarshall(vector<vector<int>>& dist) {
     int n = dist.size();
